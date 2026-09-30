@@ -2,7 +2,7 @@ services:
   - type: web
     name: nestjs-productos-graphql
     runtime: node
-    autoDeployTrigger: 'off'
+    autoDeployTrigger: checksPass
     buildCommand: npm ci && npm run build
     startCommand: npm run start:prod
     envVars:
