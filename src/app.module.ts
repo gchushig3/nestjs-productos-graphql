@@ -27,6 +27,7 @@ const observeEnabled = Boolean(
       : []),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
+      graphiql: true,
       autoSchemaFile: join(process.cwd(), 'schema.gql'),
     }),
     HttpModule.register({}),
