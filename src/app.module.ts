@@ -10,13 +10,21 @@ import { ProductosResolver } from './productos/producto.resolver.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
+const observeEnabled = Boolean(
+  process.env.OBSERVE_APP_KEY && process.env.OBSERVE_APP_SECRET,
+);
+
 @Module({
   imports: [
-    ObserveModule.forRoot({
-      appKey: process.env.OBSERVE_APP_KEY!,
-      appSecret: process.env.OBSERVE_APP_SECRET!,
-      serviceId: 'nestjs-productos-graphql',
-    }),
+    ...(observeEnabled
+      ? [
+          ObserveModule.forRoot({
+            appKey: process.env.OBSERVE_APP_KEY!,
+            appSecret: process.env.OBSERVE_APP_SECRET!,
+            serviceId: 'nestjs-productos-graphql',
+          }),
+        ]
+      : []),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'schema.gql'),

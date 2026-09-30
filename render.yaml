@@ -5,8 +5,3 @@ services:
     autoDeployTrigger: checksPass
     buildCommand: npm ci && npm run build
     startCommand: npm run start:prod
-    envVars:
-      - key: OBSERVE_APP_KEY
-        sync: false
-      - key: OBSERVE_APP_SECRET
-        sync: false
