@@ -9,7 +9,13 @@ const API_URL = 'https://my-crud-api-apc2.onrender.com/api/v1/productos';
 export class ProductosResolver {
   constructor(private readonly http: HttpService) {}
 
-    @Query(() => [Producto])
+  @Query(() => [Producto])
+  async productos(): Promise<Producto[]> {
+    const { data } = await firstValueFrom(this.http.get<Producto[]>(API_URL));
+    return data;
+  }
+
+  @Query(() => [Producto])
   async productosBaratos(
     @Args('precioMaximo', { type: () => Float }) precioMaximo: number,
   ): Promise<Producto[]> {
